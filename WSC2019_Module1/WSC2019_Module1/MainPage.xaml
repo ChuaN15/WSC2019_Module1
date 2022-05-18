@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WSC2019_Module1.MainPage">
+
+    <StackLayout x:Name="MainStack">
+        <StackLayout Orientation="Vertical" IsVisible="{Binding IsVerticle}">
+            <StackLayout Margin="20,10" Orientation="Horizontal">
+                <Picker x:Name="DeptPicker" Title="Department" ItemsSource="{Binding DepartmentList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedDepartment, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                <Picker x:Name="AssetPicker" Title="Asset Group" ItemsSource="{Binding AssetGroupList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedAssetGroup, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            </StackLayout>
+
+            <Label Text="Warranty date range: " Margin="20,0" />
+
+            <BoxView 
+                   HeightRequest="1"
+                   Color="Gray"
+                   Margin ="10, 0, 10, 0"/>
+
+            <StackLayout Margin="20,0" Orientation="Horizontal">
+                <DatePicker x:Name="StartDatePicker"
+                Date="{Binding StartDate}" Format="yyyy/MM/dd" DateSelected="DatePicker_DateSelected" />
+
+                <DatePicker x:Name="EndDatePicker"
+                Date="{Binding EndDate}" Format="yyyy/MM/dd" DateSelected="DatePicker_EndDateSelected" />
+            </StackLayout>
+
+            <StackLayout BackgroundColor="LightGray" Margin="15">
+                <Editor x:Name="searchEditor" Margin="5" Placeholder="Search" TextChanged="Editor_TextChanged" />
+            </StackLayout>
+            <Label Text="Asset list: " Margin="20,0" />
+
+            <Label Text="{Binding ItemsCount}" Margin="20,0" />
+
+            <ListView ItemsSource="{Binding AssetClassList}" IsVisible="True" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="20,5">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Label Text="{Binding assetName}"></Label>
+                                        <Label Text="{Binding dept}"></Label>
+                                        <Label Text="{Binding assetSN}"></Label>
+                                    </StackLayout>
+                                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                        <Image Source="edit.png" WidthRequest="20" HeightRequest="10"></Image>
+                                        <Image Source="transfer.png" WidthRequest="20" HeightRequest="10"></Image>
+                                        <Image Source="storage.png" WidthRequest="20" HeightRequest="10"></Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+
+
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+        <Label Margin="20,10" IsVisible="{Binding IsHorizontal}" Text="Your assets:" />
+        <ListView ItemsSource="{Binding AssetClassList}" HasUnevenRows="True" IsVisible="{Binding IsHorizontal}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="20,15">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding assetName}"></Label>
+                                    <Label TextColor="Red" Text="{Binding assetSN}"></Label>
+
+
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                    <Image Source="edit.png" WidthRequest="20" HeightRequest="10"></Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <AbsoluteLayout>
+            <ImageButton Source="add.png" 
+            BackgroundColor="Transparent"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.95,50,80" 
+            Clicked="ImageButton_Clicked" />
+        </AbsoluteLayout>
+    </StackLayout>
+
+</ContentPage>

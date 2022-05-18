@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WSC2019_Module1.AssetRegisteringPage">
+
+    <StackLayout x:Name="MainStack">
+        <StackLayout Orientation="Vertical">
+            <StackLayout BackgroundColor="Transparent" Margin="15">
+                <Editor x:Name="nameEditor" Margin="5" Placeholder="Asset Name" />
+            </StackLayout>
+            
+            <StackLayout Margin="20,10" Orientation="Horizontal">
+                <Picker x:Name="DeptPicker" Title="Department" ItemsSource="{Binding DepartmentList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedDepartment, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                <Picker x:Name="LocationPicker" Title="Location" ItemsSource="{Binding LocationList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" IsVisible="{Binding IsVerticle}">
+                <StackLayout Margin="20,10" Orientation="Horizontal">
+                    <Picker x:Name="AssetPicker" Title="Asset Group" ItemsSource="{Binding AssetGroupList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedAssetGroup, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Picker x:Name="EmployeePicker" Title="Accountable Party" ItemsSource="{Binding EmployeeList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="Transparent" Margin="15">
+                    <Editor x:Name="descEditor" Margin="5" Placeholder="Asset Description" HeightRequest="100" />
+                </StackLayout>
+
+                <Label Text="Expired Warranty: " Margin="20,0" />
+                <StackLayout Margin="20,0" Orientation="Horizontal">
+                    <DatePicker x:Name="StartDatePicker" HorizontalOptions="StartAndExpand"
+                Date="{Binding StartDate}" Format="yyyy/MM/dd" DateSelected="DatePicker_DateSelected" />
+
+                    <Label Text="{Binding AssetID}" HorizontalOptions="EndAndExpand" />
+
+                </StackLayout>
+
+                <StackLayout Margin="20,0" Orientation="Horizontal">
+                    <Button Text="Capture Image" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked"></Button>
+                    <Button Text="Browse" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_1"></Button>
+                </StackLayout>
+
+                <ListView ItemsSource="{Binding ImageList}" IsVisible="True" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="20,5">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Label Text="{Binding assetName}"></Label>
+                                        <Label Text="{Binding dept}"></Label>
+                                        <Label Text="{Binding assetSN}"></Label>
+                                    </StackLayout>
+                                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                        <Image Source="edit.png" WidthRequest="20" HeightRequest="10"></Image>
+                                        <Image Source="transfer.png" WidthRequest="20" HeightRequest="10"></Image>
+                                        <Image Source="storage.png" WidthRequest="20" HeightRequest="10"></Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+
+
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
